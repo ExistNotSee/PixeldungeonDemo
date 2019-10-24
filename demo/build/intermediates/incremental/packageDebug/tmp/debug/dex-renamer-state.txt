@@ -1,0 +1,4 @@
+#Thu Oct 24 16:11:22 CST 2019
+base.0=D\:\\MainHardDisk\\WorkProject\\Android\\PixeldungeonDemo\\demo\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
