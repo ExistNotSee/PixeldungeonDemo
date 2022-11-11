@@ -304,6 +304,6 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
     }
 
     public static void vibrate(int milliseconds) {
-//        ((Vibrator) instance.getSystemService(VIBRATOR_SERVICE)).vibrate(milliseconds);
+        ((Vibrator) instance.getSystemService(VIBRATOR_SERVICE)).vibrate(milliseconds);
     }
 }
