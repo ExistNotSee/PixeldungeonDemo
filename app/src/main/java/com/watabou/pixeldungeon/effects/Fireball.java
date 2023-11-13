@@ -33,6 +33,9 @@ import com.watabou.pixeldungeon.Assets;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.Random;
 
+/**
+ * 火炬，由多个Image共同组成的火焰动画效果
+ */
 public class Fireball extends Component {
 
 	private static final RectF BLIGHT = new RectF( 0, 0, 0.25f, 1 );
@@ -49,7 +52,7 @@ public class Fireball extends Component {
 	
 	@Override
 	protected void createChildren() {
-		
+		//火花
 		sparks = new Group();
 		add( sparks );
 		

@@ -25,6 +25,7 @@ import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.TouchArea;
 import com.watabou.pixeldungeon.PixelDungeon;
 import com.watabou.pixeldungeon.effects.Flare;
@@ -47,7 +48,7 @@ public class AboutScene extends PixelScene {
 	@Override
 	public void create() {
 		super.create();
-		
+//		RenderedText text=PixelScene.renderText(TXT,8);
 		BitmapTextMultiline text = createMultiline( TXT, 8 );
 		text.maxWidth = Math.min( Camera.main.width, 120 );
 		text.measure();
@@ -56,9 +57,7 @@ public class AboutScene extends PixelScene {
 		text.x = align( (Camera.main.width - text.width()) / 2 );
 		text.y = align( (Camera.main.height - text.height()) / 2 );
 		
-		BitmapTextMultiline link = createMultiline( LNK, 8 );
-		link.maxWidth = Math.min( Camera.main.width, 120 );
-		link.measure();
+		RenderedText link=PixelScene.renderText(LNK,8);
 		link.hardlight( Window.TITLE_COLOR );
 		add( link );
 		

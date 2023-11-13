@@ -53,17 +53,21 @@ public class TitleScene extends PixelScene {
         int w = Camera.main.width;
         int h = Camera.main.height;
 
+        //游戏菜单界面背景
         Archs archs = new Archs();
         archs.setSize(w, h);
         add(archs);
+        //游戏标题
         Image title = BannerSprites.get(BannerSprites.Type.PIXEL_DUNGEON);
         add(title);
         float height = title.height + (PixelDungeon.landscape() ? DashboardItem.SIZE : DashboardItem.SIZE * 2);
         title.x = (w - title.width()) / 2;
         title.y = (h - height) / 2;
+        //火炬动画
         placeTorch(title.x + 18, title.y + 20);
         placeTorch(title.x + title.width - 18, title.y + 20);
 
+        //给游戏标题增加一个动画效果
         Image signs = new Image(BannerSprites.get(BannerSprites.Type.PIXEL_DUNGEON_SIGNS)) {
             private float time = 0;
 
@@ -83,47 +87,22 @@ public class TitleScene extends PixelScene {
         signs.x = title.x;
         signs.y = title.y;
         add(signs);
-
-        DashboardItem btnPlay = new DashboardItem(TXT_PLAY, 0) {
-            @Override
-            protected void onClick() {
-                PixelDungeon.switchNoFade(StartScene.class);
-            }
-        };
-        add(btnPlay);
-        DashboardItem btnAbout = new DashboardItem(TXT_ABOUT, 1) {
-            @Override
-            protected void onClick() {
-                PixelDungeon.switchNoFade(AboutScene.class);
-            }
-        };
-        add(btnAbout);
-        DashboardItem btnHighscores = new DashboardItem(TXT_HIGHSCORES, 2) {
-            @Override
-            protected void onClick() {
-                PixelDungeon.switchNoFade(RankingsScene.class);
-            }
-        };
-        add(btnHighscores);
-        DashboardItem btnBadges = new DashboardItem(TXT_BADGES, 3) {
-            @Override
-            protected void onClick() {
-                PixelDungeon.switchNoFade(BadgesScene.class);
-            }
-        };
-        add(btnBadges);
+        DashboardItem btnPlay = addDashboardItem(TXT_PLAY, 0, StartScene.class);
+        DashboardItem btnAbout = addDashboardItem(TXT_ABOUT, 1, AboutScene.class);
+        DashboardItem btnHighScores = addDashboardItem(TXT_HIGHSCORES, 2, RankingsScene.class);
+        DashboardItem btnBadges = addDashboardItem(TXT_BADGES, 3, BadgesScene.class);
 
         if (PixelDungeon.landscape()) {
             float y = (h + height) / 2 - DashboardItem.SIZE;
-            btnHighscores.setPos(w / 2 - btnHighscores.width(), y);
-            btnBadges.setPos(w / 2, y);
-            btnPlay.setPos(btnHighscores.left() - btnPlay.width(), y);
+            btnHighScores.setPos(w / 2f - btnHighScores.width(), y);
+            btnBadges.setPos(w / 2f, y);
+            btnPlay.setPos(btnHighScores.left() - btnPlay.width(), y);
             btnAbout.setPos(btnBadges.right(), y);
         } else {
-            btnBadges.setPos(w / 2 - btnBadges.width(), (h + height) / 2 - DashboardItem.SIZE);
-            btnAbout.setPos(w / 2, (h + height) / 2 - DashboardItem.SIZE);
-            btnPlay.setPos(w / 2 - btnPlay.width(), btnAbout.top() - DashboardItem.SIZE);
-            btnHighscores.setPos(w / 2, btnPlay.top());
+            btnBadges.setPos(w / 2f - btnBadges.width(), (h + height) / 2 - DashboardItem.SIZE);
+            btnAbout.setPos(w / 2f, (h + height) / 2 - DashboardItem.SIZE);
+            btnPlay.setPos(w / 2f - btnPlay.width(), btnAbout.top() - DashboardItem.SIZE);
+            btnHighScores.setPos(w / 2f, btnPlay.top());
         }
 
         BitmapText version = new BitmapText("v " + Game.version, font1x);
@@ -142,6 +121,15 @@ public class TitleScene extends PixelScene {
         add(btnExit);
 
         fadeIn();
+    }
+
+    private DashboardItem addDashboardItem(String txt, int index, Class<? extends PixelScene> c) {
+        return (DashboardItem) add(new DashboardItem(txt, index) {
+            @Override
+            protected void onClick() {
+                PixelDungeon.switchNoFade(c);
+            }
+        });
     }
 
     private void placeTorch(float x, float y) {

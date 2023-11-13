@@ -10,11 +10,13 @@ plugins {
 }
 
 allprojects {
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = "UTF-8"
+        }
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

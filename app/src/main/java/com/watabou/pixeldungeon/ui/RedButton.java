@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.ui;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
@@ -27,73 +28,69 @@ import com.watabou.pixeldungeon.Chrome;
 import com.watabou.pixeldungeon.scenes.PixelScene;
 
 public class RedButton extends Button {
-	
+
 	protected NinePatch bg;
 	protected BitmapText text;
+	protected RenderedText rText;
 	protected Image icon;
-			
+
 	public RedButton( String label ) {
 		super();
-		
-		text.text( label );
-		text.measure();
+		rText = PixelScene.renderText(9);
+		add(rText);
+ 		rText.text(label);
 	}
-	
+
 	@Override
 	protected void createChildren() {
 		super.createChildren();
-		
 		bg = Chrome.get( Chrome.Type.BUTTON );
 		add( bg );
-		
+
 		text = PixelScene.createText( 9 );
-		add( text );
 	}
-	
+
 	@Override
 	protected void layout() {
-		
 		super.layout();
-		
 		bg.x = x;
 		bg.y = y;
 		bg.size( width, height );
-		
-		text.x = x + (int)(width - text.width()) / 2;
-		text.y = y + (int)(height - text.baseLine()) / 2;
-		
+
+        rText.x = x + (width - rText.width()) / 2;
+        rText.y = y + (height - rText.baseLine()) / 2;
+
 		if (icon != null) {
-			icon.x = x + text.x - icon.width() - 2;
+			icon.x = x + rText.x - icon.width() - 2;
 			icon.y = y + (height - icon.height()) / 2;
 		}
 	};
-	
+
 	@Override
 	protected void onTouchDown() {
 		bg.brightness( 1.2f );
 		Sample.INSTANCE.play( Assets.SND_CLICK );
 	};
-	
+
 	@Override
 	protected void onTouchUp() {
 		bg.resetColor();
 	};
-	
+
 	public void enable( boolean value ) {
 		active = value;
-		text.alpha( value ? 1.0f : 0.3f );
+        rText.alpha(value ? 1.0f : 0.3f );
 	}
-	
+
 	public void text( String value ) {
-		text.text( value );
-		text.measure();
+        rText.text(value);
 		layout();
 	}
-	
+
 	public void textColor( int value ) {
-		text.hardlight( value );
+        rText.hardlight(value);
 	}
-	
+
 	public void icon( Image icon ) {
 		if (this.icon != null) {
 			remove( this.icon );
@@ -104,12 +101,12 @@ public class RedButton extends Button {
 			layout();
 		}
 	}
-	
+
 	public float reqWidth() {
-		return text.width() + 4;
+        return rText.width+4;
 	}
-	
+
 	public float reqHeight() {
-		return text.baseLine() + 4;
+        return rText.baseLine()+4;
 	}
 }

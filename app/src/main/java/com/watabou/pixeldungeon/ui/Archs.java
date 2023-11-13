@@ -22,6 +22,9 @@ import com.watabou.noosa.SkinnedBlock;
 import com.watabou.noosa.ui.Component;
 import com.watabou.pixeldungeon.Assets;
 
+/**
+ * 菜单背景：滚动拱门
+ */
 public class Archs extends Component {
 
 	private static final float SCROLL_SPEED	= 20f;

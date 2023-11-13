@@ -20,6 +20,9 @@ package com.watabou.pixeldungeon.effects;
 import com.watabou.noosa.Image;
 import com.watabou.pixeldungeon.Assets;
 
+/**
+ * 游戏是标题，如开始菜单的游戏名，游戏结束的game over，boss关等等
+ */
 public class BannerSprites {
 
 	public enum  Type {

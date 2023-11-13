@@ -94,7 +94,7 @@ public class Group extends Gizmo {
 			g.parent.remove( g );
 		}
 		
-		// Trying to find an empty space for a new member
+		// 尝试为新成员查找空白空间
 		for (int i=0; i < length; i++) {
 			if (members.get( i ) == null) {
 				members.set( i, g );

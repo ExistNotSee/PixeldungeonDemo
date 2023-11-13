@@ -97,10 +97,12 @@ public class TextureFilm {
 	}
 	
 	public float width( RectF frame ) {
+		if (frame==null)return 0;
 		return frame.width() * texWidth;
 	}
 	
 	public float height( RectF frame ) {
+		if (frame==null)return 0;
 		return frame.height() * texHeight;
 	}
 }
